@@ -1,6 +1,8 @@
 //
-//  ViewController.swift
+//  MessageController.swift
 //  ChatRoom
+//  
+//  Contains all the messages sent/received for current user from other users. Designated to be the root view when app is initiated.
 //
 //  Created by Binwei Xu on 3/16/17.
 //  Copyright © 2017 Binwei Xu. All rights reserved.
@@ -10,32 +12,77 @@ import UIKit
 import Firebase
 
 class MessageController: UITableViewController {
+    
+    let cellId = "cellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
-//        let newmessageimage = imageWithImage(image: UIImage(named: "newmessageicon"), scaledToSize: 20)
         let newmessageimage = UIImage(named: "new_message_icon")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: newmessageimage, style: .plain, target: self, action: #selector(handleNewMessage))
         
-        // use is not logged in, show the login page
+        // if user is not logged in, show the login page
         checkIfUserIsLoggedIn()
         
-        observeMessages()
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
     }
     
+    // to store all messages and group by users in a dictionary
     var messages = [Message]()
+    var messagesDictionary = [String: Message]()
     
+    // acquire messages and present them
+    func observeUserMessages(){
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        
+        //acquire the list of messages related to the current user
+        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let messageId = snapshot.key
+            let messageReference = FIRDatabase.database().reference().child("messages").child(messageId)
+            // get the actual message from the list
+            messageReference.observeSingleEvent(of: .value, with: { (snapshot2) in
+                if let dictionary = snapshot2.value as? [String: AnyObject]{
+                    let message = Message()
+                    message.setValuesForKeys(dictionary)
+                    
+                    if let toId = message.toId {
+                        self.messagesDictionary[toId] = message
+                        self.messages = Array(self.messagesDictionary.values)
+                        self.messages.sort(by: { (m1, m2) -> Bool in
+                            return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
+                        })
+                    }
+                    //this will crash because of background thread, so lets call this on dispatch_async main thread
+                    //dispatch_async(dispatch_get_main_queue())
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
+    
+    // old version to present messages and should be deleted after final testing
     func observeMessages(){
         let ref = FIRDatabase.database().reference().child("messages")
         ref.observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let message = Message()
                 message.setValuesForKeys(dictionary)
-                self.messages.append(message)
                 
+                if let toId = message.toId {
+                    self.messagesDictionary[toId] = message
+                    self.messages = Array(self.messagesDictionary.values)
+                    self.messages.sort(by: { (m1, m2) -> Bool in
+                        return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
+                    })
+                }
                 //this will crash because of background thread, so lets call this on dispatch_async main thread
                 //dispatch_async(dispatch_get_main_queue())
                 
@@ -43,36 +90,50 @@ class MessageController: UITableViewController {
                     self.tableView.reloadData()
                 }
             }
-            
-            
         }, withCancel: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return messagesDictionary.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
         
         let message = messages[indexPath.row]
-        cell.textLabel?.text = message.toId
-        cell.detailTextLabel?.text = message.text
+        cell.message = message
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 66
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = messages[indexPath.row]
+        guard let chatPartnerId = message.chatPartnerId() else {
+            return // seek a better to catch error or missing data
+        }
+        
+        let ref = FIRDatabase.database().reference().child("users").child(chatPartnerId)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: AnyObject] else {
+                return  // seek a better to catch error or missing data
+            }
+            
+            let user = User()
+            user.id = chatPartnerId
+            user.setValuesForKeys(dictionary)
+            self.showChatControllerForUser(user: user)
+        }, withCancel: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         checkIfUserIsLoggedIn()
     }
     
-//    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
-//        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
-//        image.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
-//        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-//        UIGraphicsEndImageContext()
-//        return newImage
-//    }
-    
+    // allow user to send a new message to another user
     func handleNewMessage() {
         let newMessageController = NewMessageController()
         
@@ -84,6 +145,7 @@ class MessageController: UITableViewController {
         present(navController, animated: true, completion: nil)
     }
     
+    // helper method to check if a user is logged in
     func checkIfUserIsLoggedIn(){
         if FIRAuth.auth()?.currentUser?.uid == nil{
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
@@ -92,6 +154,7 @@ class MessageController: UITableViewController {
         }
     }
     
+    // fetch info of current user to setup the nav bar
     func fetchUserAndSetupNavBarTitle() {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {
             // for some reason uid = nil
@@ -107,7 +170,14 @@ class MessageController: UITableViewController {
         }, withCancel: nil)
     }
     
+    // setup the layout of components in tab bar and present the view
     func setupNavBarWithUser(user: User) {
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
+        
+        observeUserMessages()
+        
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
         titleView.backgroundColor = UIColor.clear
@@ -142,17 +212,16 @@ class MessageController: UITableViewController {
         containerView.addSubview(nameLabel)
         nameLabel.text = user.name
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-
         
         nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
         nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
         nameLabel.heightAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
         
-        
         self.navigationItem.titleView = titleView
     }
     
+    // present the chat log view
     func showChatControllerForUser(user: User){
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -162,8 +231,8 @@ class MessageController: UITableViewController {
         
     }
 
+    // helper that handle the logout
     func handleLogout() {
-        
         // when logout bottom is clicked, sign out the current account
         do {
             try FIRAuth.auth()?.signOut()

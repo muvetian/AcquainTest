@@ -22,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+<<<<<<< HEAD
+=======
+        
+        let messageController = MessageController()
+    
+        window?.rootViewController = UINavigationController(rootViewController: messageController)
+        
+        // for GIDSignInBotton to work
+>>>>>>> d2665843d319a628ef4822567f7aeb7000f712dd
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         

@@ -15,14 +15,16 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     
     var messagesController: MessageController? //allow nav bar title update
     
+    // restrict to only portrait version on iphone devices
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
     }
-    
+    // forbid rotation
     override var shouldAutorotate: Bool {
         return false
     }
     
+    // instantiate a inputs container view
     let inputsContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
@@ -31,7 +33,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         view.layer.masksToBounds = true
         return view
     }()
-    
+    // instantiate a button for login or register
     let loginRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(r: 236, g: 22, b: 22)
@@ -39,11 +41,13 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        
+        // add action for button
         button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         
         return button
     }()
+    
+    // all the following Google login components are still under construction
     
     let googleLoginButton: GIDSignInButton = {
         let button = GIDSignInButton()
@@ -89,7 +93,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         googleLoginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 
-        
+    // handle the switch between login and register and call helper method respectively
     func handleLoginRegister() {
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
@@ -98,7 +102,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         }
     }
 
-    
+    // helper method that handle login action when button is hit
     func handleLogin() {
         guard let email = emailTextField.text,
             let password = passwordTextField.text
@@ -106,48 +110,48 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
                 print("Form is not valid")
                 return
         }
+        // log in through Firebase
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if error != nil {
-                print(error)
+                print(error as Any)
                 return
             }
+            self.messagesController?.fetchUserAndSetupNavBarTitle() //update nav bar title
             
-            self.messagesController?.fetchUserAndSetupNavBarTitle()//update nav bar title
-            
-            //successfully log in
+            //successfully log in and proceed to MessagesController
             self.dismiss(animated: true, completion: nil)
         })
     }
     
-    
+    // instantiate components in the input container : name textbox
     let nameTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Name: Steph Curry"
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
-    
+    // instantiate components in the input container : separator
     let nameSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+    // instantiate components in the input container : email textbox
     let emailTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Email Address: stcurry@davidson.edu"
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
-    
+    // instantiate components in the input container : separator
     let emailSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+    // instantiate components in the input container : password textbox
     let passwordTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Password"
@@ -181,8 +185,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         return logoView
     }()
     
-
-    
+    // switch between login and register
     lazy var loginRegisterSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
         sc.translatesAutoresizingMaskIntoConstraints = false
@@ -192,6 +195,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         return sc
     }()
     
+    // helper function that handle the changes in login page view between login and register.
     func handleLoginRegisterChange() {
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         
@@ -208,7 +212,6 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
                 self.profileImageView.alpha = 0.0
             })
         }
-        
         
         // change height of inputContainerView
         inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100:150
@@ -239,10 +242,8 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
                 let trans = CGAffineTransform(translationX: 0, y: 0)
                 let scale = CGAffineTransform.identity
                 self.logoHeaderView.transform = trans.concatenating(scale)
-                
             })
         }
-        
      }
     
     override func viewDidLoad() {
@@ -294,7 +295,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
-    // keep a reference
+    // keep a reference to the attributes of this class
     var inputsContainerViewHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
     var emailTextFieldHeightAnchor: NSLayoutConstraint?
@@ -388,6 +389,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     }
 }
 
+// helper which allows easier setup of UIColor
 extension UIColor {
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)

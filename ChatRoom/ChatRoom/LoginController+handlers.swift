@@ -1,6 +1,8 @@
 //
 //  LoginController+handlers.swift
-//  ChatRoom
+//  Chatroom
+//
+//  An extension file of LoginController that includes a few functions that handle registration.
 //
 //  Created by Binwei Xu on 3/23/17.
 //  Copyright © 2017 Binwei Xu. All rights reserved.
@@ -19,14 +21,16 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 print("Form is not valid")
                 return
         }
+        
+        // create new user account with the provided information
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error) in
             if error != nil {
-                print(error)
+                print(error as Any)
                 return
             }
             
             guard let uid = user?.uid else {
-                return
+                return // seek a better to catch error or missing data
             }
             
             // upload image to firebase storage using the reference
@@ -39,7 +43,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
                     //metadata is description of the data uploaded
                     if error != nil {
-                        print(error)
+                        print(error as Any)
                         return
                     }
                     
@@ -52,15 +56,17 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         })
     }
     
+    // register the entered user information into Firebase with randomly generated ID
     private func registerUserIntoDatabaseWithUID(uid : String, values: [String: Any]) {
         
-        //successfully authenticated user
-        let ref = FIRDatabase.database().reference(fromURL: "https://chatroom-29e51.firebaseio.com/")
+        // successfully authenticated user
+        // replaced reference(fromURL: "https://chatroom-29e51.firebaseio.com/")
+        let ref = FIRDatabase.database().reference()
         let usersReference = ref.child("users").child(uid)
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
             if err != nil {
-                print(err)
+                print(err as Any)
                 return
             }
             
@@ -74,7 +80,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         })
     }
     
-    
+    // handler to present image picker to select image for profile image
     func handleSelectProfileImage() {
         let picker = UIImagePickerController()
         
@@ -84,6 +90,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         present(picker, animated: true, completion: nil)
     }
     
+    // initiate the image picker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         var selectedImageFromPicker: UIImage?
@@ -101,8 +108,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         
         dismiss(animated: true, completion: nil)
     }
-    
-    
+    // handle cancelling from image picker and return to previous view
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
