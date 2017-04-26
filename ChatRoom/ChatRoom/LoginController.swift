@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 
 class LoginController: UIViewController, GIDSignInUIDelegate {
-    
+    var myProfileViewController: MyProfileController?
     var messagesController: MessageController? //allow nav bar title update
     
     // restrict to only portrait version on iphone devices

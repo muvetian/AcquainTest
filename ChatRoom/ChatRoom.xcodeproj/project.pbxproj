@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2714E4391EB1130600563AEC /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E4381EB1130600563AEC /* CustomTabBarController.swift */; };
+		2714E43B1EB1130E00563AEC /* MyProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E43A1EB1130E00563AEC /* MyProfileController.swift */; };
+		2714E4401EB1131600563AEC /* ImageTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E43C1EB1131600563AEC /* ImageTextTableViewCell.swift */; };
+		2714E4411EB1131600563AEC /* ImageTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */; };
+		2714E4421EB1131600563AEC /* AvatarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */; };
+		2714E4431EB1131600563AEC /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */; };
 		56AB64831E86FFB30054593A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AB64821E86FFB30054593A /* Extensions.swift */; };
 		56E515AB1E888B1400D889A2 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E515AA1E888B1400D889A2 /* ChatLogController.swift */; };
 		56E515AD1E88AB5500D889A2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E515AC1E88AB5500D889A2 /* Message.swift */; };
@@ -26,6 +32,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2714E4381EB1130600563AEC /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		2714E43A1EB1130E00563AEC /* MyProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileController.swift; sourceTree = "<group>"; };
+		2714E43C1EB1131600563AEC /* ImageTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextTableViewCell.swift; sourceTree = "<group>"; };
+		2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTextTableViewCell.xib; sourceTree = "<group>"; };
+		2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarTableViewCell.xib; sourceTree = "<group>"; };
+		2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
 		34847E2880E488170EE92865 /* Pods_ChatRoom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatRoom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56AB64821E86FFB30054593A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		56E515AA1E888B1400D889A2 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
@@ -126,10 +138,16 @@
 		56EF01F01E7C5184001BD8D7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2714E43A1EB1130E00563AEC /* MyProfileController.swift */,
+				2714E4381EB1130600563AEC /* CustomTabBarController.swift */,
 				56EF01E01E7B5E41001BD8D7 /* MessageController.swift */,
 				56EF01F11E7C51AE001BD8D7 /* LoginController.swift */,
 				56EF01F51E83093C001BD8D7 /* NewMessageController.swift */,
 				56EF02011E839DDB001BD8D7 /* LoginController+handlers.swift */,
+				2714E43C1EB1131600563AEC /* ImageTextTableViewCell.swift */,
+				2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */,
+				2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */,
+				2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */,
 				56E515AA1E888B1400D889A2 /* ChatLogController.swift */,
 			);
 			name = Controller;
@@ -215,10 +233,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2714E4421EB1131600563AEC /* AvatarTableViewCell.xib in Resources */,
 				56EF01E91E7B5E41001BD8D7 /* LaunchScreen.storyboard in Resources */,
 				56EF01F41E7CD2ED001BD8D7 /* GoogleService-Info.plist in Resources */,
 				56EF01E61E7B5E41001BD8D7 /* Assets.xcassets in Resources */,
 				56EF01E41E7B5E41001BD8D7 /* Main.storyboard in Resources */,
+				2714E4411EB1131600563AEC /* ImageTextTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,12 +297,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2714E43B1EB1130E00563AEC /* MyProfileController.swift in Sources */,
 				56E515AB1E888B1400D889A2 /* ChatLogController.swift in Sources */,
 				56EF01F61E83093C001BD8D7 /* NewMessageController.swift in Sources */,
+				2714E4431EB1131600563AEC /* AvatarTableViewCell.swift in Sources */,
+				2714E4391EB1130600563AEC /* CustomTabBarController.swift in Sources */,
 				56EF01E11E7B5E41001BD8D7 /* MessageController.swift in Sources */,
 				56E515AD1E88AB5500D889A2 /* Message.swift in Sources */,
 				56EF02021E839DDB001BD8D7 /* LoginController+handlers.swift in Sources */,
 				56EF01F21E7C51AE001BD8D7 /* LoginController.swift in Sources */,
+				2714E4401EB1131600563AEC /* ImageTextTableViewCell.swift in Sources */,
 				56EF02001E8350FE001BD8D7 /* User.swift in Sources */,
 				56E535571EA9B3A5001E5A68 /* ChatMessageCell.swift in Sources */,
 				56EF01DF1E7B5E41001BD8D7 /* AppDelegate.swift in Sources */,

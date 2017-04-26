@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         let messageController = MessageController()
     
-        window?.rootViewController = UINavigationController(rootViewController: messageController)
-        
+//        window?.rootViewController = UINavigationController(rootViewController: messageController)
+        window?.rootViewController = CustomTabBarController()
         // for GIDSignInBotton to work
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
