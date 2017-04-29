@@ -35,6 +35,7 @@ class MyProfileController: UITableViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.title = "Me"
+        
         self.tableView.register(AvatarTableViewCell.self, forCellReuseIdentifier: "AvatarTableViewCell")
 //        self.tableView.register(UINib(nibName: "AvatarTableViewCell", bundle: nil), forCellReuseIdentifier: "AvatarTableViewCell")
 //        self.tableView.register(UINib(nibName: "ImageTextTableViewCell", bundle: nil), forCellReuseIdentifier: "ImageTextTableViewCell")

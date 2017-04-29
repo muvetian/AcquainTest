@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1C7818FF366438308B6ED5056CF1E8F3"
+               BlueprintIdentifier = "823B49E7082EEA0B3054FE24D88A4A85"
                BuildableName = "Pods_ChatRoom.framework"
                BlueprintName = "Pods-ChatRoom"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1C7818FF366438308B6ED5056CF1E8F3"
+            BlueprintIdentifier = "823B49E7082EEA0B3054FE24D88A4A85"
             BuildableName = "Pods_ChatRoom.framework"
             BlueprintName = "Pods-ChatRoom"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1C7818FF366438308B6ED5056CF1E8F3"
-            BuildableName = "Pods_ChatRoom.framework"
-            BlueprintName = "Pods-ChatRoom"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

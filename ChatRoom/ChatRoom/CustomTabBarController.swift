@@ -23,6 +23,8 @@ class CustomTabBarController:UITabBarController{
         recentMessagesNavController.tabBarItem.image = UIImage(named: "Recent")
         let profileController = MyProfileController()
         let profileNavController = UINavigationController(rootViewController: profileController)
+        
+        
         profileNavController.tabBarItem.title = "Me"
         profileNavController.tabBarItem.image = UIImage(named:"Settings")
         

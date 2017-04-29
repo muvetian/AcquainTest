@@ -22,7 +22,7 @@ class MessageController: UITableViewController {
         
         let newmessageimage = UIImage(named: "new_message_icon")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: newmessageimage, style: .plain, target: self, action: #selector(handleNewMessage))
-        
+//        self.navigationController?.navigationBar.barTintColor = UIColor.black;
         // if user is not logged in, show the login page
         checkIfUserIsLoggedIn()
         

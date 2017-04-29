@@ -13,6 +13,10 @@
 		2714E4411EB1131600563AEC /* ImageTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */; };
 		2714E4421EB1131600563AEC /* AvatarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */; };
 		2714E4431EB1131600563AEC /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */; };
+		2714E4451EB3D2E400563AEC /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E4441EB3D2E400563AEC /* LeaderboardViewController.swift */; };
+		2714E4491EB3D53B00563AEC /* CustomFoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E4481EB3D53B00563AEC /* CustomFoldingCell.swift */; };
+		2714E44B1EB3D77100563AEC /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E44A1EB3D77100563AEC /* FoldingCell.swift */; };
+		2714E4531EB5108400563AEC /* CustomFoldingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2714E4521EB5108300563AEC /* CustomFoldingView.xib */; };
 		56AB64831E86FFB30054593A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AB64821E86FFB30054593A /* Extensions.swift */; };
 		56E515AB1E888B1400D889A2 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E515AA1E888B1400D889A2 /* ChatLogController.swift */; };
 		56E515AD1E88AB5500D889A2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E515AC1E88AB5500D889A2 /* Message.swift */; };
@@ -38,6 +42,10 @@
 		2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTextTableViewCell.xib; sourceTree = "<group>"; };
 		2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarTableViewCell.xib; sourceTree = "<group>"; };
 		2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
+		2714E4441EB3D2E400563AEC /* LeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		2714E4481EB3D53B00563AEC /* CustomFoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFoldingCell.swift; sourceTree = "<group>"; };
+		2714E44A1EB3D77100563AEC /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
+		2714E4521EB5108300563AEC /* CustomFoldingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomFoldingView.xib; sourceTree = "<group>"; };
 		34847E2880E488170EE92865 /* Pods_ChatRoom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatRoom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56AB64821E86FFB30054593A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		56E515AA1E888B1400D889A2 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
@@ -139,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				2714E43A1EB1130E00563AEC /* MyProfileController.swift */,
+				2714E4441EB3D2E400563AEC /* LeaderboardViewController.swift */,
+				2714E4481EB3D53B00563AEC /* CustomFoldingCell.swift */,
 				2714E4381EB1130600563AEC /* CustomTabBarController.swift */,
 				56EF01E01E7B5E41001BD8D7 /* MessageController.swift */,
 				56EF01F11E7C51AE001BD8D7 /* LoginController.swift */,
@@ -148,7 +158,9 @@
 				2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */,
 				2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */,
 				2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */,
+				2714E44A1EB3D77100563AEC /* FoldingCell.swift */,
 				56E515AA1E888B1400D889A2 /* ChatLogController.swift */,
+				2714E4521EB5108300563AEC /* CustomFoldingView.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -239,6 +251,7 @@
 				56EF01E61E7B5E41001BD8D7 /* Assets.xcassets in Resources */,
 				56EF01E41E7B5E41001BD8D7 /* Main.storyboard in Resources */,
 				2714E4411EB1131600563AEC /* ImageTextTableViewCell.xib in Resources */,
+				2714E4531EB5108400563AEC /* CustomFoldingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,9 +311,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2714E43B1EB1130E00563AEC /* MyProfileController.swift in Sources */,
+				2714E4491EB3D53B00563AEC /* CustomFoldingCell.swift in Sources */,
 				56E515AB1E888B1400D889A2 /* ChatLogController.swift in Sources */,
 				56EF01F61E83093C001BD8D7 /* NewMessageController.swift in Sources */,
 				2714E4431EB1131600563AEC /* AvatarTableViewCell.swift in Sources */,
+				2714E44B1EB3D77100563AEC /* FoldingCell.swift in Sources */,
 				2714E4391EB1130600563AEC /* CustomTabBarController.swift in Sources */,
 				56EF01E11E7B5E41001BD8D7 /* MessageController.swift in Sources */,
 				56E515AD1E88AB5500D889A2 /* Message.swift in Sources */,
@@ -311,6 +326,7 @@
 				56E535571EA9B3A5001E5A68 /* ChatMessageCell.swift in Sources */,
 				56EF01DF1E7B5E41001BD8D7 /* AppDelegate.swift in Sources */,
 				56E535551E9EBA8A001E5A68 /* UserCell.swift in Sources */,
+				2714E4451EB3D2E400563AEC /* LeaderboardViewController.swift in Sources */,
 				56AB64831E86FFB30054593A /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
