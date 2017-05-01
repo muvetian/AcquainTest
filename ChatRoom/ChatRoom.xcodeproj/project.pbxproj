@@ -90,6 +90,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5658FBB01EB7C01600EF686B /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */,
+				2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */,
+				2714E4521EB5108300563AEC /* CustomFoldingView.xib */,
+			);
+			name = xib;
+			sourceTree = "<group>";
+		};
 		56AB64811E86FFA30054593A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,8 +111,12 @@
 		56E535531E9EBA03001E5A68 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2714E4481EB3D53B00563AEC /* CustomFoldingCell.swift */,
+				2714E43C1EB1131600563AEC /* ImageTextTableViewCell.swift */,
+				2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */,
 				56E535541E9EBA8A001E5A68 /* UserCell.swift */,
 				56E535561EA9B3A5001E5A68 /* ChatMessageCell.swift */,
+				2714E44A1EB3D77100563AEC /* FoldingCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -128,6 +142,7 @@
 		56EF01DD1E7B5E41001BD8D7 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
+				5658FBB01EB7C01600EF686B /* xib */,
 				56E535531E9EBA03001E5A68 /* View */,
 				56AB64811E86FFA30054593A /* Helpers */,
 				56EF01FE1E8350DA001BD8D7 /* Model */,
@@ -148,19 +163,12 @@
 			children = (
 				2714E43A1EB1130E00563AEC /* MyProfileController.swift */,
 				2714E4441EB3D2E400563AEC /* LeaderboardViewController.swift */,
-				2714E4481EB3D53B00563AEC /* CustomFoldingCell.swift */,
 				2714E4381EB1130600563AEC /* CustomTabBarController.swift */,
 				56EF01E01E7B5E41001BD8D7 /* MessageController.swift */,
 				56EF01F11E7C51AE001BD8D7 /* LoginController.swift */,
 				56EF01F51E83093C001BD8D7 /* NewMessageController.swift */,
 				56EF02011E839DDB001BD8D7 /* LoginController+handlers.swift */,
-				2714E43C1EB1131600563AEC /* ImageTextTableViewCell.swift */,
-				2714E43D1EB1131600563AEC /* ImageTextTableViewCell.xib */,
-				2714E43E1EB1131600563AEC /* AvatarTableViewCell.xib */,
-				2714E43F1EB1131600563AEC /* AvatarTableViewCell.swift */,
-				2714E44A1EB3D77100563AEC /* FoldingCell.swift */,
 				56E515AA1E888B1400D889A2 /* ChatLogController.swift */,
-				2714E4521EB5108300563AEC /* CustomFoldingView.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
