@@ -254,8 +254,8 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         view.addSubview(logoHeaderView)
         view.addSubview(googleLoginButton)
         
-        view.addSubview(customGoogleLoginButton)
-        setupCustomGoogleLoginButton()
+//        view.addSubview(customGoogleLoginButton)
+//        setupCustomGoogleLoginButton()
         
         setupGoogleLoginButton()
         setupInputsContainterView()

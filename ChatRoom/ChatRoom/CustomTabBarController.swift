@@ -24,14 +24,13 @@ class CustomTabBarController:UITabBarController{
         let profileController = MyProfileController()
         let profileNavController = UINavigationController(rootViewController: profileController)
         
-        
         profileNavController.tabBarItem.title = "Me"
         profileNavController.tabBarItem.image = UIImage(named:"Settings")
         
         
-        
         viewControllers = [recentMessagesNavController,createNavControllerWithTitle(title: "Friends", imgName: "Friends"),createNavControllerWithTitle(title: "Leaderboard", imgName: "Leaderboard"),profileNavController]
     }
+    
     /**
         A helper function to create a new tab item on the tab bar
      

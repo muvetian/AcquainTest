@@ -172,6 +172,28 @@ class MyProfileController: UITableViewController {
         let rows = self.itemDataSource[section]
         return rows.count
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchUserAndSetupNavBarTitle()
+    }
+    
+    // fetch User object from NewMessageController and pass to chatlogcontroller
+    var user: User?
+    
+    func fetchUserAndSetupNavBarTitle() {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            // for some reason uid = nil
+            return
+        }
+        
+        FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: Any] {
+                self.user?.setValuesForKeys(dictionary)
+                print(self.user?.email)
+            }
+        }, withCancel: nil)
+    }
+    
     /**
         Overrides the cellForRowAt function to configure the cell for different rows in the table view
      
@@ -185,6 +207,12 @@ class MyProfileController: UITableViewController {
 //        let cell = self.tableView.dequeueReusableCell(withIdentifier: "AvatarTableViewCell")as! AvatarTableViewCell
 //            
             let cell = Bundle.main.loadNibNamed("AvatarTableViewCell", owner: self, options: nil)?.first as! AvatarTableViewCell
+            
+//            if let profileImageUrl = self.user?.profileImageUrl {
+//                cell.avatarImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
+//            }
+//            cell.nicknameLabel.text = user?.name
+//            cell.chatIDLabel.text = user?.email
             return cell
         }
         else{
